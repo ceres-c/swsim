@@ -395,8 +395,7 @@ static swicc_ret_et proactive_cmd__tlv__item_icon_identifier_list(
              */
             uint8_t const index_backwards =
                 (uint8_t)(tlv_item_icon_identifier_list->icon_identifier_count -
-                          icon_identifier_i) -
-                1;
+                          icon_identifier_i - 1);
             if (swicc_dato_bertlv_enc_data(
                     encoder,
                     &tlv_item_icon_identifier_list
@@ -1355,7 +1354,7 @@ static swicc_ret_et proactive_app_default__step(
             for (uint8_t item_i = 0; item_i < item_count; ++item_i)
             {
                 item[item_i].valid = true;
-                item[item_i].item_identifier = item_i + 1;
+                item[item_i].item_identifier = (uint8_t)(item_i + 1);
                 item[item_i].item_text_string = item_text[item_i];
             }
 
@@ -1377,7 +1376,7 @@ static swicc_ret_et proactive_app_default__step(
             for (uint8_t item_i = 0; item_i < item_count; ++item_i)
             {
                 item[item_i].valid = true;
-                item[item_i].item_identifier = item_i + 1;
+                item[item_i].item_identifier = (uint8_t)(item_i + 1);
                 item[item_i].item_text_string = item_text[item_i];
             }
 
@@ -1399,7 +1398,7 @@ static swicc_ret_et proactive_app_default__step(
             for (uint8_t item_i = 0; item_i < item_count; ++item_i)
             {
                 item[item_i].valid = true;
-                item[item_i].item_identifier = item_i + 1;
+                item[item_i].item_identifier = (uint8_t)(item_i + 1);
                 item[item_i].item_text_string = item_text[item_i];
             }
 
@@ -1421,7 +1420,7 @@ static swicc_ret_et proactive_app_default__step(
             for (uint8_t item_i = 0; item_i < item_count; ++item_i)
             {
                 item[item_i].valid = true;
-                item[item_i].item_identifier = item_i + 1;
+                item[item_i].item_identifier = (uint8_t)(item_i + 1);
                 item[item_i].item_text_string = item_text[item_i];
             }
 
@@ -1443,7 +1442,7 @@ static swicc_ret_et proactive_app_default__step(
             for (uint8_t item_i = 0; item_i < item_count; ++item_i)
             {
                 item[item_i].valid = true;
-                item[item_i].item_identifier = item_i + 1;
+                item[item_i].item_identifier = (uint8_t)(item_i + 1);
                 item[item_i].item_text_string = item_text[item_i];
             }
 
@@ -1465,7 +1464,7 @@ static swicc_ret_et proactive_app_default__step(
             for (uint8_t item_i = 0; item_i < item_count; ++item_i)
             {
                 item[item_i].valid = true;
-                item[item_i].item_identifier = item_i + 1;
+                item[item_i].item_identifier = (uint8_t)(item_i + 1);
                 item[item_i].item_text_string = item_text[item_i];
             }
 
@@ -1487,7 +1486,7 @@ static swicc_ret_et proactive_app_default__step(
             for (uint8_t item_i = 0; item_i < item_count; ++item_i)
             {
                 item[item_i].valid = true;
-                item[item_i].item_identifier = item_i + 1;
+                item[item_i].item_identifier = (uint8_t)(item_i + 1);
                 item[item_i].item_text_string = item_text[item_i];
             }
 
@@ -1972,7 +1971,7 @@ swicc_ret_et proactive_app_default__envelope(
                                         {
                                             item[item_i].valid = true;
                                             item[item_i].item_identifier =
-                                                item_i + 1;
+                                                (uint8_t)(item_i + 1);
                                             item[item_i].item_text_string =
                                                 item_text[item_i];
                                             items_next_action_indicator_list

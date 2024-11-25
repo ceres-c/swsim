@@ -199,7 +199,7 @@ TEST(milenage, rotl128_full_byte)
     {
         uint8_t n[16];
         memcpy(n, n_const, 16);
-        rotl128(n, i * 8);
+        rotl128(n, (uint8_t)(i * 8));
         CHECK_BUF_EQ(n, n_rotl[i], 16);
     }
 }

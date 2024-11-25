@@ -27,9 +27,9 @@ static void xorv(uint8_t const *const a, uint8_t const *const b,
  */
 static void rotl128(uint8_t n[const 16], uint32_t const r)
 {
-    uint32_t const rot = r % 128;
-    uint32_t const rot_byte = rot / 8;
-    uint32_t const rot_bit = rot % 8;
+    uint8_t const rot = r % 128;
+    uint8_t const rot_byte = rot / 8;
+    uint8_t const rot_bit = rot % 8;
 
     if (rot != r)
     {
@@ -45,7 +45,7 @@ static void rotl128(uint8_t n[const 16], uint32_t const r)
     for (uint8_t i = 0; i < 16; ++i)
     {
         n[i] = n_cpy[(i + rot_byte) % 16];
-        n[i] >>= rot_bit;
+        n[i] = (uint8_t)(n[i] >> rot_bit);
 
         uint8_t const bit_carry =
             (uint8_t)(n_cpy[(i + 1 + rot_byte) % 16] << (8 - rot_bit));
@@ -393,7 +393,7 @@ swicc_ret_et milenage(milenage_st *const milenage, uint8_t const rand[const 16],
                     uint8_t v = c[i][ja][jb];
                     for (uint8_t k = 0; k < 8; ++k)
                     {
-                        one_count[i] += v & 0x01;
+                        one_count[i] = (uint8_t)(one_count[i] + (v & 0x01)); // No overflow, this executes 128 times
                         v >>= 1;
                     }
                 }
@@ -504,19 +504,19 @@ swicc_ret_et milenage(milenage_st *const milenage, uint8_t const rand[const 16],
                                TS 31.102 V17.5.0 clause.7.1.2.1. */
         output[i++] = sizeof(res);
         memcpy(&output[i], res, sizeof(res));
-        i += sizeof(res);
+        i = (uint8_t)(i + sizeof(res));
 
         output[i++] = sizeof(ck);
         memcpy(&output[i], ck, sizeof(ck));
-        i += sizeof(ck);
+        i = (uint8_t)(i + sizeof(ck));
 
         output[i++] = sizeof(ik);
         memcpy(&output[i], ik, sizeof(ik));
-        i += sizeof(ik);
+        i = (uint8_t)(i + sizeof(ik));
 
         output[i++] = sizeof(kc);
         memcpy(&output[i], kc, sizeof(kc));
-        i += sizeof(kc);
+        i = (uint8_t)(i + sizeof(kc));
 
         *output_len = i;
         fprintf(stderr, "Mileage: authenticated.\n");
